@@ -1,9 +1,11 @@
 import tensorflow as tf
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 import re
 import nltk
 import collections
+import nltk.classify.util
 #nltk.download('stopwords')
 # nltk.download('wordnet')
 # nltk.download('punkt')
@@ -15,11 +17,17 @@ from nltk.tokenize import word_tokenize
 from nltk.tokenize import punkt
 from nltk.stem import WordNetLemmatizer
 from sklearn.model_selection import train_test_split
+from nltk.classify import NaiveBayesClassifier
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.decomposition import LatentDirichletAllocation
+from sklearn.model_selection import GridSearchCV
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_auc_score
+from collections import defaultdict
 import joblib
 # import keras as keras
 
@@ -120,13 +128,48 @@ def lemmatizeText(data):
 dataset['text'] = dataset['text'].apply(lambda text: lemmatizeText(text))
 print(dataset.head(5))
 
-df = dataset
-x_train, x_test, y_train, y_test = train_test_split(df['text'], df['target'], random_state=0)
-
-
-# x_train, x_test, y_train, y_test = train_test_split(dataset['text'], dataset['target'], test_size = 0.3)
+###################################################################
 # df = dataset
+# x_train, x_test, y_train, y_test = train_test_split(df['text'], df['target'], random_state=0)
+# est = Pipeline([('vectorizer', TfidfVectorizer(lowercase=False)), 
+#                 ('classifier', LogisticRegression(solver='liblinear'))])
 
+# vect = TfidfVectorizer(lowercase=False)
+# #GridSearchCV with a transformer and a estimator
+# parameters = {'vectorizer__max_df': (0.8,0.9), 
+#  'vectorizer__min_df': [10,20,0.1],
+#  'classifier__C':np.logspace(-3,3,7), 
+#  'classifier__penalty':['l1','l2']}
+
+# gs=GridSearchCV(est,param_grid=parameters)
+# #fit the training data
+# gs.fit(x_train, y_train)
+
+# predictions = gs.predict(vect.transform(x_test))
+# print('AUC: ', roc_auc_score(y_test, predictions))
+##################################################################
+
+x_train, x_test, y_train, y_test = train_test_split(dataset['text'], dataset['target'], stratify = dataset['target'], test_size=0.3, random_state=42)
+
+vec = CountVectorizer(stop_words='english')
+x = vec.fit_transform(x_train).toarray()
+x_test = vec.transform(x_test).toarray()
+
+nb = MultinomialNB()
+y_pred_nb = nb.fit(x, y_train).predict_proba(x_test)
+print("preds = ", y_pred_nb)
+
+acc = nb.score(x_test, y_test)
+print(acc)
+# trainData = x_train + str(y_train)
+# testData = x_test + str(y_test)
+# classifier = NaiveBayesClassifier.train(trainData)
+# print('accuracy:', nltk.classify.util.accuracy(testData))
+# classifier.show_most_informative_features()
+
+
+#### One below deffo works !!!!!!!!! ####
+# x_train, x_test, y_train, y_test = train_test_split(dataset['text'], dataset['target'], test_size = 0.3)
 # tfidf = TfidfVectorizer(max_df=0.90, min_df=0.02, max_features=1000, stop_words='english') #GO BACK TO THIS AND LAMBDAS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # # vectorizer = TfidfVectorizer()
 # tfidf.fit(list(x_train) + list(x_test))
@@ -143,7 +186,7 @@ fileName = "simpleAI.joblib"
 joblib.dump(nb, fileName)
 
 vecFile = "vecSimpleAI.joblib"
-joblib.dump(tfidf, vecFile)
+joblib.dump(vec, vecFile)
 
 
 nb = joblib.load("simpleAI.joblib")
