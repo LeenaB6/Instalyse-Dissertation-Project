@@ -1,0 +1,271 @@
+.App {
+overflow: hidden;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 10s linear;
+  }
+}
+
+.backImage {
+  background-repeat: no-repeat;
+  background-position-x: left;
+  position: absolute;
+  padding: 1%;
+  width: 350px;
+  display: flex;
+  top: 120px;
+  image-rendering: auto;
+  justify-content: left;
+}
+
+.caption {
+  background-color: lightgray;
+  border: 1px darkgrey solid;
+}
+
+.analysisContainer {
+  display: flex;
+}
+
+h1 {
+  width: fit-content;
+  font-size: 50px;
+  background: linear-gradient(to right, #BC3DF8, #E745E6, #F1379C, #F69C32);
+  background-clip: text;
+  padding-left: 20px;
+  -webkit-text-fill-color: transparent;
+}
+
+.searchContainer {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.searchInput {
+  width: 700px;
+  height: 30px;
+  font-size: 20px;
+  color: white;
+  margin-left: 400px;
+  padding-inline-start: 25px;
+  background: linear-gradient(to right, #BC3DF8, #E745E6, #F1379C, #F69C32);
+  opacity: 0.5;
+  border-radius: 20px;
+  border: 0;
+}
+
+.searchButton {
+  background: linear-gradient(to left, rgb(180, 57, 237, 0.5), rgb(231, 69, 230, 0.5), rgb(241, 55, 156, 0.5), rgb(246, 156, 50, 0.5));
+  color: white;
+  font-weight: bold;
+  height: 25px;
+  width: fit-content;
+  font-size: 12px;
+  margin-left: 7px;
+  border-radius: 10px;
+  border: 0;
+}
+
+.errorTitle {
+  position: absolute;
+  left: 36%;
+  top: 53%;
+}
+
+.backButton {
+  background: linear-gradient(to right, rgb(180, 57, 237, 0.5), rgb(231, 69, 230, 0.5), rgb(241, 55, 156, 0.5), rgb(246, 156, 50, 0.5));
+  color: white;
+  font-weight: bold;
+  height: 25px;
+  font-size: 15px;
+  border: 1px darkgray;
+  border-color: darkgray;
+}
+
+.topBar {
+  height: 15px;
+  background: linear-gradient(to right, #BC3DF8, #E745E6, #F1379C, #F69C32);
+  width: 200%;
+  animation: inf-scroll 10s linear infinite;
+}
+
+.profilePicandTextContainer {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  margin-right: 5px;
+  margin-left: 5px;
+  background-color: lightgray;
+}
+
+.profileTextContainer {
+  display: flex;
+  flex-direction: column;
+  padding-top: 15px;
+  height: 175px;
+}
+
+.profilePic {
+  float: left;
+  margin: 10px;
+  width: 165px;
+  height: 165px;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 10px;
+}
+
+.showUsername {
+  position: relative;
+  margin: 2px;
+}
+
+.showName {
+  position: relative;
+  margin: 2px;
+}
+
+.showFollowers {
+  position: relative;
+  margin: 2px;
+}
+
+.showBio {
+  position: relative;
+  word-wrap: break-word;
+  margin: 3px;
+}
+
+.profileInfoContainer {
+  display: flex;
+}
+
+.profileAnalysisContainer {
+  display: flex;
+  right: 0;
+  flex-direction: row;
+  padding: 5px;
+  width: 49%;
+  height: 190px;
+  background-color: lightgray;
+  align-items: center;
+}
+
+.topicWordcloud {
+  flex-basis: 80%;
+  height: 100%;
+  width: 100%;
+}
+
+.profilePercCircle {
+  flex-basis: 20%;
+  width: 165px;
+}
+
+.homepageButton{
+  position: absolute;
+  right: 0;
+  margin: 20px;
+  width: 80px;
+  height: 25px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  background: linear-gradient(to right, rgb(180, 57, 237, 0.5), rgb(231, 69, 230, 0.5), rgb(241, 55, 156, 0.5), rgb(246, 156, 50, 0.5));
+  border: 0;
+  top: 0;
+}
+
+.postGrid {
+  display: grid;
+  width: 100vw;
+  padding: 5px;
+  gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.gridPics {
+  width: 400px;
+  height: 400px;
+  margin: 5px;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+img {
+  width: 100%;
+}
+
+.selectedVid {
+  width: 500px;
+  margin: 20px;
+}
+
+.selectedImg {
+  margin: 20px;
+}
+
+.imgContainer {
+  display: grid;
+  margin-left: 5px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 50%;
+}
+
+.captionContainer {
+  padding: 10px;
+  width: 50%;
+}
+
+.circleContainer {
+  width: 200px;
+}
+
+@keyframes inf-scroll {
+ 0% {
+  transform: translateX(0);
+ }
+ 50% {
+  transform: translateX(-48%);
+
+ }
+ 100% {
+  transform: translateX(0);
+
+ }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
