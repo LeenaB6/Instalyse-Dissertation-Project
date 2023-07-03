@@ -1,3 +1,6 @@
+NOTE!! To run from GitHub, a meta developers account is needed, alongside a business/creator instagram account that adheres to the requirements of the Instagram Graph API. Enter the Instagram ID of this account where indicated in the server/index.js file and use this ID to create an access token through meta developers platform. Once this is done insert the access token where indicated in the server/index.js file and the application should work!
+
+
 To run the instalyse application, you need to ensure that the two artificial intelligence files are runninng, 'simple-ai.py' and 'supervised-topic-model.py'.
 Ensure these Flask servers are running on the ports declared otherwise the analysis wont work.
 
